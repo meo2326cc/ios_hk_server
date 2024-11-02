@@ -1,5 +1,6 @@
 import Express from "express";
 import axios from 'axios'
+import cors from 'cors'
 import 'dotenv/config'
 
 const app = Express()
@@ -18,6 +19,7 @@ let data;
     }
 })()
 
+app.use(cors())
 app.get( "/" , ( req ,res )=>{
     res.send(data)
 } )
