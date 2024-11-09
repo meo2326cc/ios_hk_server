@@ -25,4 +25,18 @@ jobs:
         run: npm install
 
       - name: Run tests
+        env:
+          GOOGLE_SHEET_BOOK: ${{ secrets.GOOGLE_SHEET_BOOK }}
+          GOOGLE_SHEET_COMM_POST: ${{ secrets.GOOGLE_SHEET_COMM_POST }}
+          GOOGLE_SHEET_COMM_PUBL: ${{ secrets.GOOGLE_SHEET_COMM_PUBL }}
+          GOOGLE_SHEET_ELEC: ${{ secrets.GOOGLE_SHEET_ELEC }}
+          GOOGLE_SHEET_GOVP: ${{ secrets.GOOGLE_SHEET_GOVP }}
+          GOOGLE_SHEET_LEGC: ${{ secrets.GOOGLE_SHEET_LEGC }}
+          GOOGLE_SHEET_POPY: ${{ secrets.GOOGLE_SHEET_POPY }}
+          GOOGLE_SHEET_NGOA: ${{ secrets.GOOGLE_SHEET_NGOA }}
+          GOOGLE_SHEET_NGOP: ${{ secrets.GOOGLE_SHEET_NGOP }}
+          GOOGLE_SHEET_OVSE: ${{ secrets.GOOGLE_SHEET_OVSE }}
+          GOOGLE_SHEET_PERO: ${{ secrets.GOOGLE_SHEET_PERO }}
+          GOOGLE_SHEET_UKNA: ${{ secrets.GOOGLE_SHEET_UKNA }}
+          API_KEY: ${{ secrets.API_KEY }}
         run: npm test
