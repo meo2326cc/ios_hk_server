@@ -12,9 +12,12 @@ const getPubl = getData( process.env.GOOGLE_SHEET_COMM_PUBL )
 const getElec = getData( process.env.GOOGLE_SHEET_ELEC )
 const getGovp = getData( process.env.GOOGLE_SHEET_GOVP )
 const getLegc = getData( process.env.GOOGLE_SHEET_LEGC )
-
-console.log(process.env)
-
+const getPopy = getData( process.env.GOOGLE_SHEET_POPY )
+const getNgoa = getData( process.env.GOOGLE_SHEET_NGOA )
+const getNgop = getData( process.env.GOOGLE_SHEET_NGOP )
+const getOvse = getData( process.env.GOOGLE_SHEET_OVSE )
+const getPero = getData( process.env.GOOGLE_SHEET_PERO )
+const getUkna = getData( process.env.GOOGLE_SHEET_UKNA )
 
 app.use(cors())
 app.get( "/" , ( req ,res )=>{
@@ -37,6 +40,24 @@ app.get( "/govp" , async( req  , res)=>{
 })
 app.get( "/legc" , async( req  , res)=>{
     res.send( await getLegc.then( res=> res() ) )
+})
+app.get( "/popy" , async( req  , res)=>{
+    res.send( await getPopy.then( res=> res() ) )
+})
+app.get( "/ngoa" , async( req  , res)=>{
+    res.send( await getNgoa.then( res=> res() ) )
+})
+app.get( "/ngop" , async( req  , res)=>{
+    res.send( await getNgop.then( res=> res() ) )
+})
+app.get( "/ovse" , async( req  , res)=>{
+    res.send( await getOvse.then( res=> res() ) )
+})
+app.get( "/pero" , async( req  , res)=>{
+    res.send( await getPero.then( res=> res() ) )
+})
+app.get( "/ukna" , async( req  , res)=>{
+    res.send( await getUkna.then( res=> res() ) )
 })
 
 app.listen( port ) 
