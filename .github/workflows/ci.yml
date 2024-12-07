@@ -26,17 +26,18 @@ jobs:
 
       - name: Run tests
         env:
-          GOOGLE_SHEET_BOOK: ${{ secrets.GOOGLE_SHEET_BOOK }}
-          GOOGLE_SHEET_COMM_POST: ${{ secrets.GOOGLE_SHEET_COMM_POST }}
-          GOOGLE_SHEET_COMM_PUBL: ${{ secrets.GOOGLE_SHEET_COMM_PUBL }}
-          GOOGLE_SHEET_ELEC: ${{ secrets.GOOGLE_SHEET_ELEC }}
-          GOOGLE_SHEET_GOVP: ${{ secrets.GOOGLE_SHEET_GOVP }}
-          GOOGLE_SHEET_LEGC: ${{ secrets.GOOGLE_SHEET_LEGC }}
-          GOOGLE_SHEET_POPY: ${{ secrets.GOOGLE_SHEET_POPY }}
-          GOOGLE_SHEET_NGOA: ${{ secrets.GOOGLE_SHEET_NGOA }}
-          GOOGLE_SHEET_NGOP: ${{ secrets.GOOGLE_SHEET_NGOP }}
-          GOOGLE_SHEET_OVSE: ${{ secrets.GOOGLE_SHEET_OVSE }}
-          GOOGLE_SHEET_PERO: ${{ secrets.GOOGLE_SHEET_PERO }}
-          GOOGLE_SHEET_UKNA: ${{ secrets.GOOGLE_SHEET_UKNA }}
-          API_KEY: ${{ secrets.API_KEY }}
-        run: npm test
+        GOOGLE_SHEET_BOOK: ${{ secrets.GOOGLE_SHEET_BOOK }}
+        GOOGLE_SHEET_GOVP: ${{ secrets.GOOGLE_SHEET_GOVP }}
+        GOOGLE_SHEET_JUDI: ${{ secrets.GOOGLE_SHEET_JUDI }}
+        GOOGLE_SHEET_PERO: ${{ secrets.GOOGLE_SHEET_PERO }}
+        GOOGLE_SHEET_CREA: ${{ secrets.GOOGLE_SHEET_CREA }}
+        GOOGLE_SHEET_GOVA: ${{ secrets.GOOGLE_SHEET_GOVA }}
+        GOOGLE_SHEET_FOCUS: ${{ secrets.GOOGLE_SHEET_FOCUS }}
+        GOOGLE_SHEET_AV: ${{ secrets.GOOGLE_SHEET_AV }}
+        GOOGLE_SHEET_ELEC: ${{ secrets.GOOGLE_SHEET_ELEC }}
+        GOOGLE_SHEET_OVSE: ${{ secrets.GOOGLE_SHEET_OVSE }}
+        GOOGLE_SHEET_POPY: ${{ secrets.GOOGLE_SHEET_POPY }}
+        GOOGLE_SHEET_LEGC: ${{ secrets.GOOGLE_SHEET_LEGC }}
+        GOOGLE_SHEET_COMM: ${{ secrets.GOOGLE_SHEET_COMM }}
+        GOOGLE_SHEET_NGO: ${{ secrets.GOOGLE_SHEET_NGO }}
+      run: npm test
