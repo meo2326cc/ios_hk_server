@@ -3,17 +3,19 @@ import 'dotenv/config'
 
 const paths = [
     process.env.GOOGLE_SHEET_BOOK,
-    process.env.GOOGLE_SHEET_COMM_POST,
-    process.env.GOOGLE_SHEET_COMM_PUBL,
+    process.env.GOOGLE_SHEET_FOCUS,
+    process.env.GOOGLE_SHEET_COMM,
+    process.env.GOOGLE_SHEET_NGO,
+    process.env.GOOGLE_SHEET_AV,
     process.env.GOOGLE_SHEET_ELEC,
     process.env.GOOGLE_SHEET_GOVP,
+    process.env.GOOGLE_SHEET_GOVA,
     process.env.GOOGLE_SHEET_LEGC,
     process.env.GOOGLE_SHEET_POPY,
-    process.env.GOOGLE_SHEET_NGOA,
-    process.env.GOOGLE_SHEET_NGOP,
+    process.env.GOOGLE_SHEET_CREA,
     process.env.GOOGLE_SHEET_OVSE,
     process.env.GOOGLE_SHEET_PERO,
-    process.env.GOOGLE_SHEET_UKNA,
+    process.env.GOOGLE_SHEET_JUDI,
 ]
 
  test.each( paths )
