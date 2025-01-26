@@ -16,12 +16,7 @@ export default async function fetchSheetData(sheetLinks, apiKey, keyword) {
             rows.forEach((row, rowIndex) => {
                 row.forEach((cell, cellIndex) => {
                     if (cell.includes(keyword)) {
-                        searchResults.push({
-                            sheet: link.split('/')[7],
-                            row: rowIndex + 1,
-                            column: cellIndex + 1,
-                            value: row
-                        });
+                        searchResults.push(row);
                     }
                 });
             });
