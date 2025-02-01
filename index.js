@@ -15,7 +15,7 @@ const getGovp = getData( process.env.GOOGLE_SHEET_GOVP )
 const getGova = getData( process.env.GOOGLE_SHEET_GOVA )
 const getLegc = getData( process.env.GOOGLE_SHEET_LEGC )
 const getPopy = getData( process.env.GOOGLE_SHEET_POPY )
-//const getCrea = getData( process.env.GOOGLE_SHEET_CREA )
+const getArtf = getData( process.env.GOOGLE_SHEET_ARTF )
 const getOvse = getData( process.env.GOOGLE_SHEET_OVSE )
 const getPero = getData( process.env.GOOGLE_SHEET_PERO )
 const getJudi = getData( process.env.GOOGLE_SHEET_JUDI )
@@ -32,7 +32,7 @@ const sheetLinks = [
     process.env.GOOGLE_SHEET_GOVA,
     process.env.GOOGLE_SHEET_LEGC,
     process.env.GOOGLE_SHEET_POPY,
-    // 已失效 process.env.GOOGLE_SHEET_CREA,
+    process.env.GOOGLE_SHEET_ARTF,
     process.env.GOOGLE_SHEET_OVSE,
     process.env.GOOGLE_SHEET_PERO,
     process.env.GOOGLE_SHEET_JUDI,
@@ -69,9 +69,9 @@ app.get( "/legc" , async( req  , res)=>{
 app.get( "/popy" , async( req  , res)=>{
     res.send( await getPopy.then( res=> res() ) )
 })
-// app.get( "/crea" , async( req  , res)=>{
-//     res.send( await getCrea.then( res=> res() ) )
-// })
+app.get( "/artf" , async( req  , res)=>{
+    res.send( await getArtf.then( res=> res() ) )
+})
 app.get( "/ovse" , async( req  , res)=>{
     res.send( await getOvse.then( res=> res() ) )
 })
@@ -93,7 +93,7 @@ app.get("/search", async(req, res) => {
     if(query?.query) {
         try {
             const results = await fetchSheetData(sheetLinks, apiKey, query.query);
-            const output = { BOOK:[], FOCUS:[], AV:[], ELEC:[], GOVP:[], GOVA:[], LEGC:[], POPY:[], OVSE:[], PERO:[], JUDI:[], COMM:[], NGO:[] };
+            const output = { BOOK:[], FOCUS:[], AV:[], ELEC:[], GOVP:[], GOVA:[], LEGC:[], POPY:[], OVSE:[], PERO:[], JUDI:[], COMM:[], NGO:[], ARTF:[] };
 
             results.forEach((i) => {
                 switch (i.sheet) {
@@ -135,6 +135,9 @@ app.get("/search", async(req, res) => {
                         break;
                     case "NGO?majorDimension=ROWS":
                         output.NGO.push(i);
+                        break;
+                    case "ARTF?majorDimension=ROWS":
+                        output.ARTF.push(i);
                         break;    
                     default:
                         break;
