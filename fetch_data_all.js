@@ -1,33 +1,49 @@
 import axios from "axios";
 import 'dotenv/config'
 
+// 儲存快取資料
+let cachedData = {};
+let lastFetchTime = null;
+const CACHE_DURATION = 5 * 60 * 1000; // 快取時間5分鐘
+
 export default async function fetchSheetData(sheetLinks, apiKey, keyword) {
+    const currentTime = new Date().getTime();
     const searchResults = [];
 
-    for (const link of sheetLinks) {
-        try {
-            const res = await axios.get(link, {
-                headers: { 'X-goog-api-key': apiKey }
-            });
-
-            const rows = res.data.values;
-            if (!rows || rows.length === 0) continue;
-
-            rows.forEach((row, rowIndex) => {
-                row.forEach((cell, cellIndex) => {
-                    if (cell.includes(keyword)) {
-                        searchResults.push({
-                            sheet: link.split('/')[7],
-                            row: rowIndex + 1,
-                            column: cellIndex + 1,
-                            value: row
-                        });
-                    }
+    // 檢查是否需要重新獲取資料
+    if (!lastFetchTime || currentTime - lastFetchTime > CACHE_DURATION) {
+        // 重新獲取所有sheet資料
+        for (const link of sheetLinks) {
+            try {
+                const res = await axios.get(link, {
+                    headers: { 'X-goog-api-key': apiKey }
                 });
-            });
-        } catch (error) {
-            console.error(`Error fetching ${link}:`, error);
+                cachedData[link] = res.data.values;
+            } catch (error) {
+                console.error(`Error fetching ${link}:`, error);
+                cachedData[link] = null;
+            }
         }
+        lastFetchTime = currentTime;
+    }
+
+    // 使用快取資料進行搜尋
+    for (const link of sheetLinks) {
+        const rows = cachedData[link];
+        if (!rows || rows.length === 0) continue;
+
+        rows.forEach((row, rowIndex) => {
+            row.forEach((cell, cellIndex) => {
+                if (cell.includes(keyword)) {
+                    searchResults.push({
+                        sheet: link.split('/')[7],
+                        row: rowIndex + 1,
+                        column: cellIndex + 1,
+                        value: row
+                    });
+                }
+            });
+        });
     }
 
     return searchResults;
@@ -44,7 +60,7 @@ const sheetLinks = [
     process.env.GOOGLE_SHEET_GOVA,
     process.env.GOOGLE_SHEET_LEGC,
     process.env.GOOGLE_SHEET_POPY,
-    // 已失效 process.env.GOOGLE_SHEET_CREA,
+    process.env.GOOGLE_SHEET_ARTF,
     process.env.GOOGLE_SHEET_OVSE,
     process.env.GOOGLE_SHEET_PERO,
     process.env.GOOGLE_SHEET_JUDI,
