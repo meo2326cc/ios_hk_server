@@ -33,16 +33,15 @@ export default async function fetchSheetData(sheetLinks, apiKey, keyword) {
         if (!rows || rows.length === 0) continue;
 
         rows.forEach((row, rowIndex) => {
-            row.forEach((cell, cellIndex) => {
-                if (cell.includes(keyword)) {
-                    searchResults.push({
-                        sheet: link.split('/')[7],
-                        row: rowIndex + 1,
-                        column: cellIndex + 1,
-                        value: row
-                    });
-                }
-            });
+            // 檢查這一行是否有任何欄位包含關鍵字
+            if (row.some(cell => cell.includes(keyword))) {
+                searchResults.push({
+                    sheet: link.split('/')[7],
+                    row: rowIndex + 1,
+                    column: row.findIndex(cell => cell.includes(keyword)) + 1,
+                    value: row
+                });
+            }
         });
     }
 
